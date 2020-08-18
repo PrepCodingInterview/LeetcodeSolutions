@@ -11,7 +11,8 @@ class Solution:
         
         Thoughts:
         
-        This is the rule where if there is a cycle the interestion point of the slow and fast pointer in said cycle denote as {INTERSECT}. The iterating {INTERSECT} one step at a time and a pointer from the start of the cycle, the intersection is the start of the cycle
+        This is the rule where if there is a cycle the intersection point of the slow and fast pointer in said cycle is denoted as {INTERSECT}.
+        Then iterating from {INTERSECT} one step at a time and a new pointer from the start of the cycle, their intersection is the start of the cycle.
         
         Proof:
         
@@ -54,17 +55,20 @@ class Solution:
         Space: O(1)
         '''
         
+        ##create fast and slow pointers
         slow = head 
         fast = head
-        
+
+        ##Find the first intersection point between the fast and slow pointer
         while slow and fast and fast.next:
             slow = slow.next
             fast = fast.next.next
             
-            if slow == fast: ##cycle this is the intersection point
-                while head != slow:
+            if slow == fast: ##cycle detected, this is the intersection point between the fast and slow pointer
+                while head != slow: ## now from the head or start of the linked list iterate one at a time until you reach a slow with slow which is also iterating one at a time
                     head=head.next
                     slow=slow.next
+                ##The slow that is returned is the start of the cycle
                 return slow
             
         return None
